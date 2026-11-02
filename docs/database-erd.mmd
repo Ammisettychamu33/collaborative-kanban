@@ -1,0 +1,102 @@
+erDiagram
+    ORGANIZATION ||--o{ TENANT : has
+    ORGANIZATION ||--o{ MEMBERSHIP : has
+    ORGANIZATION ||--o{ BOARD : owns
+    
+    TENANT ||--o{ MEMBERSHIP : contains
+    TENANT ||--o{ BOARD : isolates
+    TENANT ||--o{ COLUMN : isolates
+    TENANT ||--o{ TASK : isolates
+    TENANT ||--o{ ACTIVITY_LOG : logs
+
+    USER ||--o{ MEMBERSHIP : belongs_to
+    USER ||--o{ BOARD : creates
+    USER ||--o{ TASK : creates
+    USER ||--o{ TASK : assigned_to
+    USER ||--o{ ACTIVITY_LOG : performs
+
+    BOARD ||--o{ COLUMN : contains
+    BOARD ||--o{ TASK : groups
+    COLUMN ||--o{ TASK : holds
+
+    ORGANIZATION {
+        uuid id PK
+        string name
+        datetime created_at
+        datetime updated_at
+    }
+
+    TENANT {
+        uuid id PK
+        uuid organization_id FK
+        string name
+        datetime created_at
+        datetime updated_at
+    }
+
+    USER {
+        uuid id PK
+        string name
+        string email UK
+        string password_hash
+        datetime created_at
+        datetime updated_at
+    }
+
+    MEMBERSHIP {
+        uuid id PK
+        uuid user_id FK
+        uuid organization_id FK
+        uuid tenant_id FK
+        enum role "ORG_ADMIN | TENANT_ADMIN | MEMBER"
+        datetime created_at
+    }
+
+    BOARD {
+        uuid id PK
+        uuid organization_id FK
+        uuid tenant_id FK
+        string name
+        string description
+        uuid created_by FK
+        datetime created_at
+        datetime updated_at
+    }
+
+    COLUMN {
+        uuid id PK
+        uuid board_id FK
+        uuid tenant_id FK
+        string name
+        int position
+        datetime created_at
+        datetime updated_at
+    }
+
+    TASK {
+        uuid id PK
+        uuid board_id FK
+        uuid column_id FK
+        uuid tenant_id FK
+        string title
+        string description
+        uuid assigned_to FK
+        enum priority "LOW | MEDIUM | HIGH | URGENT"
+        datetime due_date
+        int position
+        int version
+        uuid created_by FK
+        datetime created_at
+        datetime updated_at
+    }
+
+    ACTIVITY_LOG {
+        uuid id PK
+        uuid tenant_id FK
+        uuid user_id FK
+        string entity_type
+        string entity_id
+        string action
+        json details
+        datetime created_at
+    }

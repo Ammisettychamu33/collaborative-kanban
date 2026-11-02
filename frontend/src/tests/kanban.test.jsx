@@ -35,7 +35,7 @@ describe('Frontend UI & Kanban Components', () => {
     const hyderabadBtn = screen.getByText(/Hyderabad Branch Admin/i);
     fireEvent.click(hyderabadBtn);
 
-    expect(mockLogin).toHaveBeenCalledWith('admin.hyd@example.com', 'Password123!');
+    expect(mockLogin).toHaveBeenCalledWith('hydadmin@acme.com', 'Password123!');
   });
 
   it('TaskCard displays title, priority, and OCC version badge', () => {

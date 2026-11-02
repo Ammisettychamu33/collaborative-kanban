@@ -56,9 +56,13 @@ export function KanbanBoard({
       setLoading(true);
       setError(null);
       const res = await api.get(`/boards/${activeBoard.id}`);
-      const boardData = res.data.data;
-      setColumns(boardData.columns || []);
-      setTasks(boardData.tasks || []);
+      const boardData = res.data?.data || res.data || {};
+      const cols = boardData.columns || [];
+      setColumns(cols);
+
+      // Tasks can be directly on boardData.tasks or nested inside each column
+      const allTasks = boardData.tasks || cols.flatMap((c) => c.tasks || []);
+      setTasks(allTasks);
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to load board details');
     } finally {
@@ -71,8 +75,9 @@ export function KanbanBoard({
     if (!activeTenant?.id) return;
     try {
       const res = await api.get(`/tenants/${activeTenant.id}/members`);
-      const members = res.data.data.map((m) => ({
-        userId: m.userId,
+      const rawMembers = Array.isArray(res.data) ? res.data : (res.data?.data || []);
+      const members = rawMembers.map((m) => ({
+        userId: m.userId || m.user?.id,
         name: m.user?.name || m.user?.email,
         email: m.user?.email,
         role: m.role,

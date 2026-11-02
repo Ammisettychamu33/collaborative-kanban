@@ -371,11 +371,11 @@ The login screen provides **one-click login buttons** for all testing personas:
 
 | Persona | Organization | Tenant | Email | Password | Role |
 |---|---|---|---|---|---|
-| **Acme Org Admin** | Acme Technologies | All Branches | `admin.acme@example.com` | `Password123!` | `ORG_ADMIN` |
-| **Hyderabad Admin** | Acme Technologies | Hyderabad Hub | `admin.hyd@example.com` | `Password123!` | `TENANT_ADMIN` |
-| **Hyderabad Member** | Acme Technologies | Hyderabad Hub | `member.hyd@example.com` | `Password123!` | `MEMBER` |
-| **Bangalore Admin** | Acme Technologies | Bangalore Hub | `admin.blr@example.com` | `Password123!` | `TENANT_ADMIN` |
-| **Globex Org Admin** | Globex Logistics | Mumbai Hub | `admin.globex@example.com` | `Password123!` | `ORG_ADMIN` |
+| **Acme Org Admin** | Acme Technologies | All Branches | `orgadmin@acme.com` | `Password123!` | `ORG_ADMIN` |
+| **Hyderabad Admin** | Acme Technologies | Hyderabad Hub | `hydadmin@acme.com` | `Password123!` | `TENANT_ADMIN` |
+| **Hyderabad Member** | Acme Technologies | Hyderabad Hub | `hydmember@acme.com` | `Password123!` | `MEMBER` |
+| **Bangalore Admin** | Acme Technologies | Bangalore Hub | `blradmin@acme.com` | `Password123!` | `TENANT_ADMIN` |
+| **Globex Org Admin** | Globex Logistics | Mumbai Hub | `mumbaiadmin@globex.com` | `Password123!` | `ORG_ADMIN` |
 
 ---
 

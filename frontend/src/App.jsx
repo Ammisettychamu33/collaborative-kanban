@@ -50,7 +50,7 @@ function KanbanApp() {
     try {
       setLoadingBoards(true);
       const res = await api.get('/boards');
-      const fetchedBoards = res.data.data || [];
+      const fetchedBoards = Array.isArray(res.data) ? res.data : (res.data?.data || []);
       setBoards(fetchedBoards);
 
       // Select first board or retain currently active if it exists in new list
